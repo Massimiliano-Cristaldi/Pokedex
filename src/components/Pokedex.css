@@ -1,0 +1,250 @@
+/* Global */
+
+body{
+    background-color: #DB092B !important;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.mainWrapper{
+    background-color: #DEE0E0;
+    min-height: 85vh;
+    width: 95vw;
+    padding: 10px 5px;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    color: rgb(75, 75, 75);
+    font-family: "Nunito", "Manrope";
+    font-weight: 600;
+    font-size: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+
+.errorWrapper{
+    background-color: rgb(248, 142, 142);
+    color: rgb(185, 29, 29);
+    padding: 0px 10px;
+    margin-top: 5px;
+    border: 2px solid rgb(185, 29, 29);
+    border-radius: 7px;
+}
+
+#charmender{
+    width: 50%;
+}
+
+@media screen and (max-width: 776px) {
+    #charmender{
+        width: 90%;
+    }
+}
+
+/* List */
+
+@media screen and (max-width: 776px) {
+    #searchByName span{
+        margin-left: 15px;
+    }
+}
+
+
+#searchByName input{
+    border-radius: 5px;
+    padding-left: 5px;
+    width: 50%;
+}
+
+#searchByName button{
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+#searchByName button:hover{
+    background-color: black;
+    color: white;
+}
+
+.loadingInput{
+    background-image: url(/src/assets/loading.gif);
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: right 5px top 50%;
+}
+
+#cardWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 70vh;
+    width: 80%;
+    padding: 10px;
+    background-color: #313131;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+#cardWrapper>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pokeCard{
+    color: white !important;
+}
+
+#paginationButtonWrapper button{
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: 4px;
+    font-size: 0.9rem;
+
+    min-width: 9vw;
+    min-height: 4vh;
+
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+#paginationButtonWrapper button:hover{
+    background-color: rgb(88, 88, 88);
+    color: rgb(221, 221, 221);
+}
+
+#paginationButtonWrapper span{
+    display: inline-block;
+    width: 25px;
+    font-size: larger;
+    text-align: center;
+}
+
+.activeBtn{
+    width: 10vw;
+    height: 5vh;
+    background-color: black !important; 
+    color: white !important;
+}
+
+#listButton{
+    background-color: #DB092B;
+    color: rgb(236, 236, 236);
+    border: none;
+    border-radius: 10px;
+
+    min-width: 15vw;
+    height: 10vh;
+
+    font-family: "Nunito", "Manrope";
+    font-size: 2.5rem;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+#inputSearchWrapper{
+    font-size: 1.1rem;
+}
+
+#inputSearchWrapper input{
+    margin: 10px;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+#inputSearchWrapper button{
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+#inputSearchWrapper button:hover{
+    background-color: black;
+    color: white;
+}
+
+/* Detail */
+
+.detailWrapper{
+    min-width: 80%
+}
+
+h2{
+    font-size: 60px;
+}
+
+h2, .pokeInfo h3{
+    margin-top: 10px;
+    color: black;
+    font-weight: 900;
+}
+
+#pokeSprite{
+    height: 200px;
+}
+
+.pokeType{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 50px;
+    border: 5px solid;
+    border-radius: 5px;
+    padding: 5px;
+    
+    color: white;
+    font-size: 27px;
+    font-weight: 700;
+    
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+.min-col-2{
+    width: 25%;
+}
+
+@media screen and (max-width: 776px) {
+    h2{
+        font-size: 40px;
+    }
+
+    #pokeSprite{
+        height: 150px;
+    }
+
+    .col-5:has(#pokeSprite){
+        align-self: start;
+        margin-top: 20px;
+    }
+}
+
+#detailBackBtn{
+    padding: 5px 10px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+#detailBackBtn:hover{
+    background-color: black;
+    color: white;
+}
