@@ -41,7 +41,11 @@ export async function loader({params}){
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${perPage}`);
         if (!response.ok) {
-            throw new Error("Pippo");
+            throw {
+                status: response.status,
+                statusText: response.statusText,
+                message: "Failed to fetch data."
+            };
         }
         const rawData = await response.json();
         return {
@@ -50,7 +54,10 @@ export async function loader({params}){
                 pageCount: Math.ceil(rawData.count/perPage)
                 };
     } catch (err) {
-        console.error(err);
-        return null;
+        console.log(err);
+        throw {
+            status: err.status || 404,
+            statusText: err.statusText || "Not found",
+        }
     }
 }

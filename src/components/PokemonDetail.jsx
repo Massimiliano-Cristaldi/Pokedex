@@ -91,13 +91,24 @@ export default function PokemonDetail(){
 export async function loader({params}){
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.itemId}/`);
-        if (!response.ok) {
-            throw new Error("Pippo");
+        console.log(response);
+        
+        if (response.ok == false) {
+            console.log("pippo");
+            
+            throw {
+                status: response.status,
+                statusText: response.statusText,
+                message: "Failed to fetch data."
+            };
         }
         const data = await response.json();
         return {data, itemId: params.itemId};
     } catch (err) {
         console.error(err);
-        return null;
+        throw {
+            status: err.status || 404,
+            statusText: err.statusText || "Not found",
+        }
     }
 }

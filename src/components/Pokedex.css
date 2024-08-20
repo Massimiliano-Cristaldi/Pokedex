@@ -13,7 +13,7 @@ a{
     background-color: #DEE0E0;
     min-height: 85vh;
     width: 95vw;
-    padding: 10px 5px;
+    padding: 10px 0px;
     border-radius: 10px;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -123,6 +123,10 @@ a{
 
 .pokeCard{
     color: white !important;
+}
+
+#paginationButtonWrapper{
+    margin-top: 5px;
 }
 
 #paginationButtonWrapper button{

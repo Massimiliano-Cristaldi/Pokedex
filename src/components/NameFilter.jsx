@@ -18,10 +18,6 @@ export default function NameFilter(){
             setLoading(true);
             try {
                 const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
-                if (!response.ok) {
-                    throw new Error("Pokémon not found");
-                }
-                
                 const data = await response.json();
                 if (data.id !== undefined) {
                     navigate(`/detail/${data.id}`);
