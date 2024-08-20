@@ -41,7 +41,7 @@ export default function NameFilter(){
     return(
         <>
         <div id="searchByName">
-            <Form onSubmit={e => searchByName(e)}>
+            <Form onSubmit={e => searchByName(e)} className="text-center">
                 <span>Filter list by name: </span>
                 <input 
                 type="text" 

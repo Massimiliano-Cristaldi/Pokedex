@@ -39,6 +39,25 @@ a{
     border-radius: 7px;
 }
 
+.errorPage{
+    background-color: rgb(241, 241, 241);
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: "Nunito", "Manrope";
+}
+
+.errorPage>button{
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
 #charmender{
     width: 50%;
 }

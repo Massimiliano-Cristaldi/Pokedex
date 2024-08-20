@@ -4,8 +4,7 @@ import { statColor, typeStyle, shortStat, strTrim } from "./styleFunctions";
 
 export default function PokemonDetail(){
     
-    const [data, setData] = useState({});
-    const itemId = useLoaderData();
+    const {data, itemId} = useLoaderData();
     const perPage = 20;
     const itemPage = (id)=>{
         if (id <= 1025) {
@@ -13,18 +12,10 @@ export default function PokemonDetail(){
         } else {
             return Math.ceil((id - 8975) / perPage);
         }
-    }
+    }    
+        
+    console.log(data); 
 
-    console.log(window.innerWidth);
-    
-    
-    useEffect(()=>{
-        fetch(`https://pokeapi.co/api/v2/pokemon/${itemId}/`)
-        .then(response => response.json())
-        .then(apiData => setData(apiData))
-        .catch(err => console.error(err));
-    }, [itemId]);
-    
     return(
     <>
         <h2>{data.name ? strTrim(data.name) : "N/A"}</h2>
@@ -39,14 +30,18 @@ export default function PokemonDetail(){
                     <div className="col-6">Weight: {data?.weight ? data?.weight / 10 : "N/A"} kg</div>
                 </div>
                 <h3>Abilities:</h3>
-                {data.abilities?.map((el, index)=>(
+                {data.abilities ? 
+                data.abilities.map((el, index)=>(
                     <div key={index}>
                         {strTrim(el.ability.name)}
                     </div>
-                ))}
+                )) 
+                : "N/A"}
                 <h3>Type(s):</h3>
                 <div className="d-flex flex-wrap gap-2">
-                {data.types?.map((el, index)=>(
+                {
+                data.types ?
+                data.types.map((el, index)=>(
                     <span 
                     key={index}
                     style={typeStyle(el.type.name)}
@@ -54,10 +49,13 @@ export default function PokemonDetail(){
                     >
                         {strTrim(el.type.name)}
                     </span>
-                ))}
+                ))
+                : "N/A"}
                 </div>
                 <h3>Stats:</h3>
-                {data.stats?.map((el, index)=>(
+                {
+                data.stats ?
+                data.stats.map((el, index)=>(
                 <div className="d-flex flex-wrap" key={index}>
                     <div className="col-4">
                     {window.innerWidth >= 996 ?
@@ -75,7 +73,8 @@ export default function PokemonDetail(){
                             }}></div> 
                     </div>
                 </div>
-                ))}
+                ))
+                : "N/A"}
             </div>
         </div>
         <div>
@@ -89,7 +88,16 @@ export default function PokemonDetail(){
     )
 }
 
-export function loader({params}){
-    const itemId = params.itemId;
-    return itemId;
+export async function loader({params}){
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.itemId}/`);
+        if (!response.ok) {
+            throw new Error("Pippo");
+        }
+        const data = await response.json();
+        return {data, itemId: params.itemId};
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
 }

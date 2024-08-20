@@ -5,6 +5,7 @@ import Pokedex from './components/Pokedex.jsx'
 import PokeList, { loader as pokeLoader } from './components/PokeList.jsx'
 import ListButton from './components/ListButton.jsx'
 import PokemonDetail, { loader as detailLoader } from './components/PokemonDetail.jsx'
+import ErrorPage from './components/ErrorPage.jsx'
 import './index.css'
 
 const router = createBrowserRouter([
@@ -26,7 +27,8 @@ const router = createBrowserRouter([
         element: <PokemonDetail/>,
         loader: detailLoader,
       }
-    ]
+    ],
+    errorElement: <ErrorPage/>,
   }
 ])
 

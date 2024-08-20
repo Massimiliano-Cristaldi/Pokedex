@@ -7,22 +7,7 @@ import { strTrim } from "./styleFunctions";
 
 export default function PokeList(){
 
-    const [data, setData] = useState([]);
-    const [itemCount, setItemCount] = useState(0);
-    const pageId = Number(useLoaderData());
-    const perPage = 20;
-    const offset = (pageId - 1) * perPage;
-    const pageCount = Math.ceil(itemCount/perPage);    
-
-    useEffect(()=>{
-        fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${perPage}`).
-        then(response => response.json()).
-        then(apiData => {
-                setData(apiData.results);
-                setItemCount(apiData.count);
-            }).
-        catch(err => console.error(err));
-    }, [pageId])
+    const {data, pageId, pageCount} = useLoaderData();
 
     return(
         <>
@@ -41,14 +26,31 @@ export default function PokeList(){
     )
 }
 
-export function loader({params}){
-    const pageId = params.pageId;
+export async function loader({params}){
+    const perPage = 20;
+    const offset = (params.pageId - 1) * perPage;
+
     // If pageId is less than 1 or a non-numeric string, redirect to page 1
-    if (pageId < 1 || /^\d+$/.test(pageId) === false) {
+    if (params.pageId < 1 || /^\d+$/.test(params.pageId) === false) {
         return redirect("/list/page/1");
     // If pageId is greater than page count, redirect to the last page
-    } else if (pageId > 66) {
+    } else if (params.pageId > 66) {
         return redirect("/list/page/66");
     }
-    return pageId;
+
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${perPage}`);
+        if (!response.ok) {
+            throw new Error("Pippo");
+        }
+        const rawData = await response.json();
+        return {
+                data: rawData.results,
+                pageId: params.pageId, 
+                pageCount: Math.ceil(rawData.count/perPage)
+                };
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
 }
