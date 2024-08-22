@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useNavigate, Form } from "react-router-dom";
-import { strUntrim } from "./styleFunctions";
+import { strUntrim } from "./utils";
 
 export default function NameFilter(){
     

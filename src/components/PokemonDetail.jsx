@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import { statColor, typeStyle, shortStat, strTrim } from "./styleFunctions";
+import { statColor, typeStyle, shortStat, strTrim, perPageContext } from "./utils";
 
 export default function PokemonDetail(){
     
     const {data, itemId} = useLoaderData();
-    const perPage = 20;
+    const perPage = useContext(perPageContext);    
     const itemPage = (id)=>{
         if (id <= 1025) {
             return Math.ceil(id / perPage);
@@ -14,8 +14,6 @@ export default function PokemonDetail(){
         }
     }    
         
-    console.log(data); 
-
     return(
     <>
         <h2>{data.name ? strTrim(data.name) : "N/A"}</h2>
@@ -90,12 +88,8 @@ export default function PokemonDetail(){
 
 export async function loader({params}){
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.itemId}/`);
-        console.log(response);
-        
-        if (response.ok == false) {
-            console.log("pippo");
-            
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.itemId}/`);        
+        if (response.ok == false) {            
             throw {
                 status: response.status,
                 statusText: response.statusText,

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { redirect, useLoaderData } from "react-router-dom";
 import PokeCard from "./PokeCard";
 import PaginationButton from "./PaginationButton";
 import NameFilter from "./NameFilter";
-import { strTrim } from "./styleFunctions";
+import { strTrim } from "./utils";
 
 export default function PokeList(){
 
@@ -11,17 +11,17 @@ export default function PokeList(){
 
     return(
         <>
-            <NameFilter/>
-            <div id="cardWrapper">
-                {data.map((el, index)=>(
-                    <PokeCard 
-                    key={index}
-                    name={strTrim(el.name)}
-                    id={index}
-                    pageId={pageId}/>
-                ))}
-            </div>
-            <PaginationButton pageId={pageId} pageCount={pageCount}/>
+                <NameFilter/>
+                <div id="cardWrapper">
+                    {data.map((el, index)=>(
+                        <PokeCard 
+                        key={index}
+                        name={strTrim(el.name)}
+                        id={index}
+                        pageId={pageId}/>
+                    ))}
+                </div>
+                <PaginationButton pageId={pageId} pageCount={pageCount}/>
         </>
     )
 }
@@ -49,6 +49,7 @@ export async function loader({params}){
         }
         const rawData = await response.json();
         return {
+                perPage,
                 data: rawData.results,
                 pageId: params.pageId, 
                 pageCount: Math.ceil(rawData.count/perPage)

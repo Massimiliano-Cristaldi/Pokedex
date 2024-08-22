@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { perPageContext } from "./utils";
 
 export default function PokeCard(props){
     
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
-    const perPage = 20;
+    const perPage = useContext(perPageContext);
+    
     const offset = (props.pageId - 1) * perPage + 1;
 
     let itemId = 0;

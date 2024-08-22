@@ -1,3 +1,12 @@
+import { createContext } from "react";
+
+//This constant evaluates the number of items displayed in each page
+//The default value is 20, but a different number can be given by changing the value in the provider @ Pokedex.jsx
+//and the value of "perPage" in the loader @ PokeList.jsx
+//I wanted to make it possible to change the value in just a single place to affect the entire app, but you can't make 
+//hook calls inside loader functions and I couldn't figure a workaround
+export const perPageContext = createContext(20);
+
 export function strTrim (string){
     string = string.charAt(0).toUpperCase() + string.replace(/-/g, " ").slice(1);
     return string;
