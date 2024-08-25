@@ -37,6 +37,7 @@ a{
     margin-top: 5px;
     border: 2px solid rgb(185, 29, 29);
     border-radius: 7px;
+    text-align: center;
 }
 
 .errorPage{

@@ -4,6 +4,8 @@ import { strUntrim } from "./utils";
 
 export default function NameFilter(){
     
+    //I'm using a state variable to check the loading state instead of useNavigation
+    //because it gives better control over it and thus a more responsive UX
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const inputRef = useRef();
@@ -46,11 +48,10 @@ export default function NameFilter(){
                 <button type="submit">Go</button>
             </Form>
         </div>
-        {error ?
+        {error &&
         <div className="errorWrapper">
             <i className="fa-solid fa-circle-exclamation" style={{color: "#b01111"}}></i> {error}
-        </div>
-        : null}
+        </div>}
         </>
     )
 }
