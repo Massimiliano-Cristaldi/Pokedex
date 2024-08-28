@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { perPageContext } from "./utils";
+import { perPageContext } from "../utils";
 
 export default function PokeCard(props){
     

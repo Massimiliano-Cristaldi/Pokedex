@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import { statColor, typeStyle, shortStat, strTrim, perPageContext } from "./utils";
+import { statColor, typeStyle, shortStat, strTrim, perPageContext } from "../utils";
 
 export default function PokemonDetail(){
     
